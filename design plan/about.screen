@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:WidgetGroup" id="20" x="64" y="64" measuredWidth="561" measuredHeight="489">
+    <widgets xsi:type="model:WidgetGroup" id="15" x="16" y="88" measuredWidth="545" measuredHeight="401">
+      <widgets xsi:type="model:Text" id="2" x="8" y="232" width="441" height="169" text="&#xD;&#xA;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="441" measuredHeight="169">
+        <font size="13px"/>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="14" measuredWidth="545" measuredHeight="177">
+        <widgets xsi:type="model:Image" id="1" measuredWidth="177" measuredHeight="177" src="assets/pic.jpeg"/>
+        <widgets xsi:type="model:VLine" id="3" x="200" height="177" measuredWidth="6" measuredHeight="177"/>
+        <widgets xsi:type="model:Panel" id="4" x="212" width="333" height="177" measuredWidth="333" measuredHeight="177" background="black" alpha="128" border="none"/>
+        <widgets xsi:type="model:TextField" id="6" x="296" y="48" width="209" measuredWidth="209" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:TextField" id="7" x="296" y="96" width="209" measuredWidth="209" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Button" id="8" x="334" y="134" width="89" height="33" text="Submit" measuredWidth="89" measuredHeight="33" link="sent.screen">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:TextArea" id="10" x="248" y="96" width="49" text="Email" measuredWidth="49" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:TextArea" id="11" x="248" y="48" width="49" text="Name" measuredWidth="49" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="12" x="278" y="2" measuredWidth="6" measuredHeight="67">
+          <font size="43px"/>
+        </widgets>
+        <widgets xsi:type="model:Text" id="13" x="253" y="16" text="subscribe to (blog-name), for new content " measuredWidth="251" measuredHeight="17" textAlignment="Center" foreground="#fff">
+          <font size="13px"/>
+        </widgets>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="16" measuredWidth="321" measuredHeight="41">
+      <widgets xsi:type="model:Panel" id="17" width="321" height="41" measuredWidth="321" measuredHeight="41"/>
+      <widgets xsi:type="model:LinkBar" id="18" x="10" y="9" text="about,contact,posts" measuredWidth="145" measuredHeight="23">
+        <font/>
+        <items x="0" y="0" width="34" height="23" text="about"/>
+        <items link="contact.screen" x="52" y="0" width="43" height="23" text="contact"/>
+        <items link="homepage.screen" x="113" y="0" width="31" height="23" text="posts"/>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:HLine" id="19" x="16" y="288" width="545" measuredWidth="545" measuredHeight="6"/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>

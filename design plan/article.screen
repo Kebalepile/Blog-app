@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:WidgetGroup" id="1" x="40" y="72" measuredWidth="577" measuredHeight="529">
+    <widgets xsi:type="model:WidgetGroup" id="8" measuredWidth="321" measuredHeight="41" layoutParams="anchor-left|anchor-top">
+      <widgets xsi:type="model:WidgetGroup" id="7" measuredWidth="321" measuredHeight="41">
+        <widgets xsi:type="model:WidgetGroup" id="6" measuredWidth="321" measuredHeight="41">
+          <widgets xsi:type="model:Panel" id="2" width="321" height="41" measuredWidth="321" measuredHeight="41"/>
+          <widgets xsi:type="model:WidgetGroup" id="5" x="10" y="9" measuredWidth="145" measuredHeight="23">
+            <widgets xsi:type="model:WidgetGroup" id="4" measuredWidth="145" measuredHeight="23">
+              <widgets xsi:type="model:LinkBar" id="3" text="about,contact,posts" measuredWidth="145" measuredHeight="23">
+                <font/>
+                <items link="about.screen" x="0" y="0" width="34" height="23" text="about"/>
+                <items link="../wireframing-tutorial/design%20plan/contact.screen" x="52" y="0" width="43" height="23" text="contact"/>
+                <items link="homepage.screen" x="113" y="0" width="31" height="23" text="posts"/>
+              </widgets>
+            </widgets>
+          </widgets>
+        </widgets>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="15" x="80" y="72" measuredWidth="497" measuredHeight="457" layoutParams="anchor-center|anchor-middle">
+      <widgets xsi:type="model:Panel" id="9" x="16" y="56" width="481" height="401" measuredWidth="481" measuredHeight="401" background="black" alpha="128" border="none"/>
+      <widgets xsi:type="model:HLine" id="10" y="32" width="305" measuredWidth="305" measuredHeight="6"/>
+      <widgets xsi:type="model:Label" id="11" width="297" text="Blockchain what is it" measuredWidth="297" measuredHeight="33">
+        <font size="19px" bold="true"/>
+      </widgets>
+      <widgets xsi:type="model:Text" id="12" x="48" y="88" width="409" height="153" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="409" measuredHeight="153" foreground="#fff">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Text" id="13" x="52" y="192" width="409" height="153" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="409" measuredHeight="153" foreground="#fff">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Text" id="14" x="52" y="304" width="409" height="153" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="409" measuredHeight="153" foreground="#fff">
+        <font/>
+      </widgets>
+    </widgets>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>
