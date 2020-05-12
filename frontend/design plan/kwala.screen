@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:WidgetGroup" id="19" x="120" y="160" measuredWidth="505" measuredHeight="422">
+    <widgets xsi:type="model:Panel" id="2" width="505" height="409" measuredWidth="505" measuredHeight="409"/>
+    <widgets xsi:type="model:Text" id="3" x="48" y="48" width="329" height="121" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="329" measuredHeight="121">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Text" id="4" x="56" y="192" width="329" height="121" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="329" measuredHeight="121">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:VScrollbar" id="6" x="488" height="409" measuredWidth="17" measuredHeight="409"/>
+    <widgets xsi:type="model:HLine" id="7" x="48" y="416" width="433" measuredWidth="433" measuredHeight="6"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="20" x="120" y="592" measuredWidth="505" measuredHeight="337">
+    <widgets xsi:type="model:WidgetGroup" id="11" y="28" measuredWidth="505" measuredHeight="129">
+      <widgets xsi:type="model:Panel" id="8" width="505" height="129" measuredWidth="505" measuredHeight="129"/>
+      <widgets xsi:type="model:Text" id="9" x="16" y="20" width="297" height="89" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="297" measuredHeight="89">
+        <font/>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:TextField" id="10" x="24" width="113" text="Article summary" measuredWidth="113" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Button" id="12" x="224" y="304" width="81" height="33" text="Post Article" measuredWidth="81" measuredHeight="33" link="auth.screen">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="15" y="184" measuredWidth="391" measuredHeight="23">
+      <widgets xsi:type="model:TextField" id="13" x="78" width="313" text="......" measuredWidth="313" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:TextField" id="14" width="79" text="Article Title" measuredWidth="79" measuredHeight="23">
+        <font/>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="16" y="240" measuredWidth="239" measuredHeight="23">
+      <widgets xsi:type="model:TextField" id="17" x="78" width="161" measuredWidth="161" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:TextField" id="18" width="79" text="Select image" measuredWidth="79" measuredHeight="23">
+        <font/>
+      </widgets>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Panel" id="21" x="72" y="64" width="321" height="41" measuredWidth="321" measuredHeight="41"/>
+  <widgets xsi:type="model:LinkBar" id="22" x="82" y="73" text="about,contact,posts" measuredWidth="145" measuredHeight="23">
+    <font/>
+    <items link="about.screen" x="0" y="0" width="34" height="23" text="about"/>
+    <items link="contact.screen" x="52" y="0" width="43" height="23" text="contact"/>
+    <items link="homepage.screen" x="113" y="0" width="31" height="23" text="posts"/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>

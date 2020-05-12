@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:WidgetGroup" id="8" x="232" y="192" measuredWidth="249" measuredHeight="201">
+    <widgets xsi:type="model:WidgetGroup" id="9" measuredWidth="249" measuredHeight="201">
+      <widgets xsi:type="model:WidgetGroup" id="10" measuredWidth="249" measuredHeight="201">
+        <widgets xsi:type="model:Window" id="2" width="249" height="201" text="Authenticate" measuredWidth="249" measuredHeight="201">
+          <note>enter both hashed passwords&#xD;
+</note>
+        </widgets>
+        <widgets xsi:type="model:Button" id="3" x="96" y="136" width="57" height="41" text="OK" measuredWidth="57" measuredHeight="41" link="homepage.screen">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:TextField" id="4" x="32" y="80" width="49" text="pwa" measuredWidth="49" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:TextField" id="5" x="80" y="80" width="129" text="Text field" measuredWidth="129" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:TextField" id="6" x="32" y="48" width="49" text="apple of the day" measuredWidth="49" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:TextField" id="7" x="80" y="48" width="129" text="Text field" measuredWidth="129" measuredHeight="23">
+          <font/>
+        </widgets>
+      </widgets>
+      <note>Enter 2 hashed passwords before, publishing any new article&#xD;
+</note>
+    </widgets>
+    <note>logout authenticated user after postin written article</note>
+  </widgets>
+  <widgets xsi:type="model:Note" id="11" x="40" y="40" width="169" height="105" text="logout author, after posting written article.&#xD;&#xA;" measuredWidth="169" measuredHeight="105">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+  <note>logout author after posting written article</note>
+</model:Screen>
