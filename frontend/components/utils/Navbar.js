@@ -7,7 +7,7 @@ export default function createComponent() {
      <ul class="navbar">
           <li><a class="nav-a" href="./about.html">about</a></li>
           <li><a class="nav-a" href="./contact.html">contact</a></li>
-          <li><a class="nav-a" href="/">articles</a></li>
+          <li><a  href="/">articles</a></li>
       </ul>`
 
     class Navbar extends HTMLElement {

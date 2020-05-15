@@ -35,8 +35,7 @@ class Article extends HTMLElement {
         const params = new URLSearchParams(url.search)
         if (params.has('a')) {
           searchByX(params.get('a')).then((data) => {
-            console.table(data)
-            this._article(data[0])
+            this._article(data)
           })
         }
         break

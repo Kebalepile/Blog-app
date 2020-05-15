@@ -5,6 +5,7 @@ export default (articles) => {
   headlines.setAttribute('id', 'headlines')
 
   document.body.appendChild(headlines)
+  // sort by date before publishing
   articles.forEach((article) => {
     publish(article)
   })

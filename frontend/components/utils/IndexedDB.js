@@ -72,7 +72,7 @@ export function populateStore(articles) {
     console.error(err.message)
   }
 }
-export function getArticle_(id, next) {
+export function findArticle(id, next) {
   try {
     openDB(async () => {
       try {
@@ -95,7 +95,29 @@ export function getArticle_(id, next) {
     console.error(err.message)
   }
 }
+export function allArticles(next) {
+  try {
+    openDB(async () => {
+      try {
+        let db = dbReq.result
+        let tnx = db.transaction('articles'),
+          objectStore = tnx.objectStore('articles'),
+          query = objectStore.getAll()
 
+        query.onsuccess = (e) => (query = e.target.result)
+        // important timeout of the century
+        setTimeout(() => {
+          next(query)
+          db.close()
+        }, 1000)
+      } catch (err) {
+        console.error(err.message)
+      }
+    })
+  } catch (err) {
+    console.error(err.message)
+  }
+}
 export function wipe() {
   try {
     openDB(() => {

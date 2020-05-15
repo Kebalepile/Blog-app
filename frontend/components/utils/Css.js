@@ -20,11 +20,15 @@ export default () => {
   border-right: 1px dashed black;
 }
 
-.nav-a {
+.navbar > * > *{
   text-decoration: none;
   padding: 5px;
+}
+
+.nav-a {
   color: black;
 }
+
 #darkmode {
   float: right;
   margin-right: 20px;
