@@ -1,9 +1,7 @@
 require('dotenv').config()
 const { MongoClient } = require('mongodb'),
-  uri =
-    `mongodb+srv://kebalepile:${process.env.PWD}@cluster0-l3y3d.mongodb.net/test?retryWrites=true&w=majority`
-// hide this key in production
-// 
+  uri = `mongodb+srv://kebalepile:${process.env.PWD}@cluster0-l3y3d.mongodb.net/test?retryWrites=true&w=majority`
+
 async function connect() {
   try {
     let client = new MongoClient(uri, {
@@ -22,10 +20,8 @@ async function articles() {
     let client = await connect(),
       db = client.db('keba_blog'),
       collection = db.collection('articles'),
-      articles = collection.find({}, { projection: { _id: 0 } })
-    articles = await articles.toArray()
-    // console.log('articles available')
-    // console.log(articles)
+      articles = await collection.find({}, { projection: { _id: 0 } }).toArray()
+
     client.close()
     return articles
   } catch (err) {
@@ -39,7 +35,7 @@ async function article(id) {
       db = client.db('keba_blog'),
       collection = db.collection('articles'),
       article = await collection.findOne({ id }, { projection: { _id: 0 } })
-    // console.log(article)
+       
     client.close()
     return article
   } catch (err) {
@@ -52,24 +48,61 @@ async function upload(article) {
       db = client.db('keba_blog'),
       collection = db.collection('articles'),
       res = await collection.insertOne(article)
-    console.log(res)
+   
+    client.close()
+    return res.result.ok === 1 ? true : false
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+async function deleteAll(name) {
+  try {
+    let client = await connect(),
+      db = client.db('keba_blog'),
+      collection = db.collection(name),
+      res = await collection.deleteMany()
+console.log(res)
     client.close()
   } catch (err) {
     console.error(err)
   }
 }
 
-async function deleteAll() {
+async function credentials() {
   try {
     let client = await connect(),
       db = client.db('keba_blog'),
-      collection = db.collection('articles'),
-      res = await collection.deleteMany()
-    console.log('deleted all')
-    console.log(res.result)
-    client.close()
+      collection = db.collection('credentials'),
+      user = await collection.find({},{projection: {_id:0}}).toArray()
+      // console.log(user)
+      client.close()
+      return user[0].pwd
   } catch (err) {
     console.error(err)
+  }
+}
+async function getCollections() {
+  try {
+    let client = await connect(),
+      db =  client.db('keba_blog'),
+      list =  await db.listCollections().toArray()
+    // console.log(list)
+    client.close()
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+async function createCollection(name) {
+  try {
+    let client = await connect(),
+      db = client.db('keba_blog'),
+      res = await db.createCollection(name)
+    console.log(res)
+    client.close()
+  } catch (error) {
+    console.error(error)
   }
 }
 
@@ -78,4 +111,7 @@ module.exports = {
   article,
   upload,
   deleteAll,
+  credentials,
+  getCollections,
+  createCollection,
 }

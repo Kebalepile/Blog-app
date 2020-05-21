@@ -20,22 +20,22 @@ ${css()}
       watch() {
         const form = this.shadowRoot.querySelector('.searchbar')
 
-        form.onsubmit = (e) => {
+        form.onsubmit = async (e) => {
           e.preventDefault()
-          let val = e.target.elements[1].value
-          console.log(val)
-          e.target.elements[1].value = ''
-          e.target.elements[0].blur()
+
+          let x = e.target.elements,
+            val = await x[1].value,
+            module = await import('./Sanitize.js'),
+            text = module.toText(val)
+
+          // use text.data
+          x[1].value = ''
+          x[0].blur()
         }
       }
       connectedCallback() {
-        console.log('mothertrucker searchbar in the route')
         this.watch()
       }
-      disconnectedCallback() {
-        console.log('bitch bye')
-      }
-      attributeChangedCallback(attributeName, oldVal, newVal) {}
     }
 
     window.customElements.define('search-bar', Searchbar)
@@ -46,4 +46,3 @@ ${css()}
     )
   }
 }
-

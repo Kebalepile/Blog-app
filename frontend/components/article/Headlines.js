@@ -1,12 +1,18 @@
 import publish from './Headline.js'
 
-export default (articles) => {
-  const headlines = document.createElement('section')
-  headlines.setAttribute('id', 'headlines')
+export default (res) => {
+  const headlines = document.querySelector('#headlines')
+  headlines.removeChild(headlines.querySelector('.loading'))
 
-  document.body.appendChild(headlines)
-  // sort by date before publishing
-  articles.forEach((article) => {
-    publish(article)
-  })
+  if (Array.isArray(res) && res.length > 0) {
+    res.forEach((article) => {
+      publish(article)
+    })
+  } else {
+    let msg = document.createElement('div')
+    msg.className = 'no-articles'
+    msg.innerHTML = '<em>No articles to display</em>'
+
+    headlines.appendChild(msg)
+  }
 }

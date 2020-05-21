@@ -1,25 +1,17 @@
 import css from './Css.js'
-// change css
+
 const template = document.createElement('template')
 template.innerHTML = `${css()}
- <div id="auth">
-         <form id="sub" style="margin:100px auto;background-color:#222;">
+   <div id="auth">
+     <form id="sub" style="margin:100px auto;background-color:#222;">
         <span>tokomane ya tlhokega</span>
         <section style="margin-top:5px;">
-          
-          <input type="password"
-           required
-           style="border:none; width:200px; height:25px;" />
+          <input type="password" required style="border:none; width:200px; height:25px;" />
         </section>
-        <input type="submit" value="tswara" 
-        id="submit"
-        style="width:80px; height:30px; border:none;
-               cursor:pointer;margin-top:10px;color:white;
-                background-color:orange;"
-         />
+        <input type="submit" value="tswara" id="submit" style="width:80px; height:30px; border:none;cursor:pointer;margin-top:10px;color:white;background-color:orange;"/>
       </form>
-      </div>
-    </section>`
+   </div>
+    `
 
 export default function makeComponent(callBack) {
   try {
@@ -31,34 +23,36 @@ export default function makeComponent(callBack) {
       }
       watch() {
         const form = this.shadowRoot.querySelector('form')
-        form.onsubmit = (e) => {
+        form.onsubmit = async (e) => {
           e.preventDefault()
-          Array.from(e.target.elements).forEach((e) => {
+
+          let x = e.target,
+            sanitizeModule = await import('./Sanitize.js'),
+            fetchModule = await import('./Fetch.js')
+          x.elements[1].disabled = true
+          Array.from(x.elements).forEach((e) => {
             let type = e.attributes.type.value
 
             if (type.includes('password')) {
-              // check if key === database key, fetch key in database here
-              switch (e.value) {
-                case 'isy59NWY':
+              let value = sanitizeModule.toText(e.value).data
+              // console.log(value)
+              fetchModule.sign(value).then((ok) => {
+                // console.log(ok)
+                x.elements[1].disabled = false
+                if (ok) {
                   e.value = ''
-                  callBack(true)
-                  break
-                case '#isy59NWY':
+                  callBack(ok)
+                } else {
                   e.value = ''
-                  callBack(true)
-                  break
-                default:
-                  e.value = ''
-                  callBack(false)
-                  break
-              }
+                  callBack(ok)
+                }
+              })
             }
           })
         }
       }
 
       connectedCallback() {
-        console.log('auth component mounted')
         this.watch()
       }
     }
@@ -75,4 +69,3 @@ export default function makeComponent(callBack) {
     console.error(err)
   }
 }
-

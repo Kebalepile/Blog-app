@@ -5,29 +5,14 @@ import auth from '../utils/Auth.js'
 const template = document.createElement('template')
 
 class Kwala extends HTMLElement {
-  constructor() {
+  constructor(token) {
     super()
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(template.content.cloneNode(true))
+    this.token = token
   }
-
-  createImage(files, callback) {
-    let allowed = /\.jpeg|\.jpg|\.png$/,
-      types = ['image/jpeg', 'image/jpg', 'image/png'],
-      images = []
-
-    for (let i = 0; i < files.length; i++) {
-      let file = files.item(i)
-      if (types.includes(file.type) && allowed.test(file.name)) {
-        const blob = new Blob([file], { type: file.type })
-        // URL.createObjectURL(blob)
-        images.push({
-          name: file.name,
-          blob: blob,
-        })
-      }
-    }
-    callback(images)
+  connectedCallback() {
+    this.watch()
   }
 
   watch() {
@@ -35,26 +20,27 @@ class Kwala extends HTMLElement {
       names = ['body', 'summary', 'title', 'image'],
       article = {}
 
-    form.onsubmit = (e) => {
+    form.onsubmit = async (e) => {
       e.preventDefault()
 
-      const val = e.target.elements
-      article.body = val.body.value
-      article.summary = val.summary.value
-      article.title = val.title.value
-      this.createImage(val.image.files, (images) => {
-        console.table(images)
-        article['img'] = images[0]
-      })
-      Array.from(val).forEach((element) => {
+      const x = e.target.elements,
+        sanitizeModule = await import('../utils/Sanitize.js')
+      
+      article.body = sanitizeModule.toText(x.body.value).data
+      article.summary = sanitizeModule.toText(x.summary.value).data
+      article.title = sanitizeModule.toText(x.title.value).data
+      article.img = sanitizeModule.toText(x.image.value).data
+
+      Array.from(x).forEach((element) => {
         if (names.includes(element.name)) {
           element.value = ''
         }
       })
+     
       this.toHtml(article)
     }
   }
-  toHtml({ body, summary, title, img }) {
+  async toHtml({ body, summary, title, img }) {
     const md = new Remarkable('full', {
         html: true,
         typographer: true,
@@ -72,21 +58,19 @@ class Kwala extends HTMLElement {
         img,
         body,
       }
-      // send to database
-      // backend server will shoot a statuscode trigering homepage to fetch new articles
-      console.table(article)
-      // make immedtialty at production
-      setTimeout(() => location.assign('http://127.0.0.1:5500/'), 5000)
+     
+      const fetchModule = await import('../utils/Fetch.js')
+      fetchModule.upload(article, this.token).then((res) => {
+        if (res.ok) {
+          location.assign('http://127.0.0.1:5500/')
+        }
+      })
     } catch (err) {
       console.error(err.message)
     }
   }
-
-  connectedCallback() {
-    this.watch()
-  }
 }
-function writeContent() {
+function writeContent(token) {
   navbar()
 
   template.innerHTML = `
@@ -100,18 +84,20 @@ function writeContent() {
         Artice title <input type="text"  name="title" required id="article-title" />
     </div>
     <div >
-       add image <input type="file" required  name="image" id="article-img" accept="image/*"/>
+       add image 
+       <input type="url"  placeholder="   image url" pattern="https://.*" required  name="image" id="article-img" />
     </div>
     <input type="submit" value="Post Article" style="cursor:pointer;" />
   </form>`
+  
   try {
     const customElement = window.customElements.get('full-kwala')
 
     if (typeof customElement === 'undefined') {
       window.customElements.define('full-kwala', Kwala)
-      document.body.appendChild(new Kwala())
+      document.body.appendChild(new Kwala(token))
     } else {
-      document.body.appendChild(new Kwala())
+      document.body.appendChild(new Kwala(token))
     }
   } catch (err) {
     console.error(err.message)
@@ -119,10 +105,10 @@ function writeContent() {
 }
 
 function isAllowed() {
-  auth((access) => {
+  auth((x) => {
     document.body.removeChild(document.querySelector('auth-card'))
-    if (access) {
-      writeContent()
+    if (x.access) {
+      writeContent(x.token)
     } else {
       location.assign('http://127.0.0.1:5500/')
     }

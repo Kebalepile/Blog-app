@@ -1,13 +1,12 @@
-require('dotenv').config()
-
-const { certify, certified } = require('../utils/token'),
-  urlParser = require('url').parse,
+const urlParser = require('url').parse,
+  { sign, verify } = require('../utils/token'),
   { nanoid } = require('nanoid'),
-  { pass, parse, stringify, hash, match } = require('../utils/tools'),
-  { articles, article, upload } = require('../database/queryDB'),
+  { pass, parse, match } = require('../utils/tools'),
+  { articles, article, upload, credentials } = require('../database/queryDB'),
   {
     ok,
     created,
+    nocontent,
     unauthorized,
     notFound,
     internalServerError,
@@ -15,11 +14,9 @@ const { certify, certified } = require('../utils/token'),
 
 module.exports = async (req, res) => {
   const pathname = urlParser(req.url, true).pathname
-
+  res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5500')
+  console.log(pathname)
   try {
-    // only allow frontend to use this api in production
-    res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5500')
-    console.log(pathname)
     switch (pathname) {
       case '/':
         if (pass({ req, method: 'get' })) {
@@ -28,10 +25,8 @@ module.exports = async (req, res) => {
               ok(res, data)
             })
             .catch((err) => {
-              console.error(err.message)
               internalServerError(res, err.message)
             })
-
           break
         }
         notFound(res)
@@ -39,7 +34,6 @@ module.exports = async (req, res) => {
       case '/search':
         if (pass({ req, method: 'get' })) {
           const queryObject = urlParser(req.url, true).query
-
           article(queryObject.a)
             .then((data) => {
               if (data.id === queryObject.a) {
@@ -54,34 +48,43 @@ module.exports = async (req, res) => {
         }
         break
       case '/upload':
-        if (pass({ req, method: 'post' })) {
+        if (pass({ req, method: 'options' })) {
+          res.setHeader('Access-Control-Max-Age', '300')
+          res.setHeader('Access-Control-Allow-Headers', 'Content-Type,xSigned')
+          nocontent(res)
+        } else if (pass({ req, method: 'post' })) {
           let new_article = []
           req.on('data', (chunk) => {
             new_article.push(chunk)
           })
           req.on('end', async () => {
             try {
-              let token = req.getHeader('x-tuuken'),
-                authorized = await certified(token)
-
-              if (authorized) {
-                new_article = parse(new_article)
-                upload(new_article)
-                  .then((saved) => {
-                    if (saved) {
-                      created(res)
-                    } else {
-                      throw 'internal server error'
-                    }
-                  })
-                  .catch((err) => {
-                    internalServerError(res, err.message)
-                  })
+              if (req.complete) {
+                let token = req.headers['xsigned'],
+                  authorized = await verify(token)
+                  
+                if (authorized) {
+                  new_article = await parse(new_article)
+                  new_article.id = nanoid()
+                  upload(new_article)
+                    .then((saved) => {
+                      if (saved) {
+                        created(res)
+                      } else {
+                        throw 'internal server error'
+                      }
+                    })
+                    .catch((err) => {
+                      internalServerError(res, err.message)
+                    })
+                } else {
+                  throw 'Unable to upload currently'
+                }
               } else {
-                throw 'Bitch please !!!'
+                throw 'internal server error'
               }
             } catch (err) {
-              internalServerError(res, err.message)
+              internalServerError(res, err)
             }
           })
           break
@@ -89,26 +92,38 @@ module.exports = async (req, res) => {
         notFound(res)
         break
       case '/kookiefy':
-        if (pass({ req, method: 'get' })) {
+        if (pass({ req, method: 'options' })) {
+          res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+          nocontent(res)
+        } else if (pass({ req, method: 'post' })) {
           let data = []
+
           req.on('data', (chunk) => {
             data.push(chunk)
           })
           req.on('end', async () => {
-            data = await parse(data)
-            // call database to return hased loggin passwords
+            try {
+              if (req.complete) {
+                data = await parse(data)
 
-            let secret = 'stone to the bone',
-              passwords = ['#isy59NWY#', '#0670isy$23moth#']
-            pwdMatched = passwords.map((pwd, idx) => {
-              let res = match(pwd, data[idx])
-              return res
-            })
+                let pwd = await credentials(),
+                  matched = await match(pwd, data.pwd)
 
-            if (pwdMatched[0] === true && pwdMatched[1] === true) {
-              // arrary of pwd's encrypted with secret
-              // let token = await cerfity(passwords)
-              // res.setHeader('x-tuuken', stringify(token))
+                if (matched) {
+                  let token = await sign()
+
+                  res.setHeader('Access-Control-Expose-Headers', 'x-tuuken')
+                  res.setHeader('x-tuuken', token)
+
+                  ok(res, { msg: 'tuuken set...', continue: true })
+                } else {
+                  unauthorized(res, { msg: 'Voetsek !!!' })
+                }
+              } else {
+                throw 'internal server error'
+              }
+            } catch (err) {
+              console.error(err)
             }
           })
         }

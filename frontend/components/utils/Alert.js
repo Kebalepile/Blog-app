@@ -4,18 +4,17 @@ export default function makeAlert(component) {
     const template = document.createElement('template')
     template.innerHTML = `${css()}
         <div class="alert">
-            <div class="header">
-              Alert 
+             <div class="header">
+                Alert 
              </div>
+
              <br/>
              <br/>
+
              <div class="tick">
               <img src=${
                 './components/utils/icons8_ok_480px.jpg' || '#'
-              } alt='alert image'
-             width="20px";
-             height="20px";
-              />
+              } alt='alert image' width="20px"; height="20px";/>
               Message sent
              </div>
            
@@ -38,9 +37,8 @@ export default function makeAlert(component) {
         buttons = [...buttons]
         buttons.forEach((btn) => {
           btn.onclick = (e) => {
-            const submitBtn = component.querySelector('#submit')
-
-            const alert = component.childNodes[4]
+            const submitBtn = component.querySelector('#submit'),
+              alert = component.childNodes[4]
 
             component.removeChild(alert)
             submitBtn.disabled = false
@@ -49,7 +47,6 @@ export default function makeAlert(component) {
         })
       }
       connectedCallback() {
-        console.log('alert component mounted')
         this.watch()
       }
     }

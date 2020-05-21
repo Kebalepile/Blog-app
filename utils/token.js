@@ -1,14 +1,32 @@
-async function certify() {
+require('dotenv').config()
+const jwt = require("jsonwebtoken")
+
+async function verify(token) {
   try {
-  } catch (err) {}
+    const ok = await jwt.verify(token, process.env.SK).ok
+    return ok
+  } catch (err) {
+    console.error(err)
+  }
 }
 
-async function certified(token) {
+async function sign() {
+  const payload = {
+    ok : true,
+    PK: process.env.PSK
+  }, opt = {
+    expiresIn : '2min'
+  }
   try {
-  } catch (err) {}
+    let token =  jwt.sign(payload,process.env.SK,opt)
+    return token
+    
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 module.exports = {
-  certify,
-  certified,
+  sign,
+  verify,
 }

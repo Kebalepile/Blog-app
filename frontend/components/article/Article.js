@@ -1,6 +1,7 @@
 import css from '../utils/Css.js'
 import navbar from '../utils/Navbar.js'
-import { getArticle, searchByX } from '../utils/Fetch.js'
+import loading from "../utils/Loading.js"
+import {  searchForArticleX } from '../utils/Fetch.js'
 
 const template = document.createElement('template'),
   url = new URL(location.href),
@@ -11,38 +12,24 @@ class Article extends HTMLElement {
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(template.content.cloneNode(true))
   }
-  _article(data) {
-    let { title, body } = data,
-      x = this.shadowRoot.querySelector('h3')
-
-    this.shadowRoot.removeChild(x)
-    x = document.createElement('div')
-    x.className = 'full-content'
-    x.innerHTML = `
-      <div class="full-content">
-        <h1><ul>${title} </ul></h1>
-        <br/>
-        <br/>
-        <section class="content">
-        ${body}
-        </section>
-        </div>`
-    this.shadowRoot.appendChild(x)
-  }
+ 
   display(data) {
-    switch (data) {
-      case undefined:
-        const params = new URLSearchParams(url.search)
-        if (params.has('a')) {
-          searchByX(params.get('a')).then((data) => {
-            this._article(data)
-          })
-        }
-        break
-      default:
-        this._article(data)
-        break
-    }
+    let { title, body } = data,
+    x = this.shadowRoot.querySelector('.loading')
+
+  this.shadowRoot.removeChild(x)
+  x = document.createElement('div')
+  x.className = 'full-article'
+  x.innerHTML = `
+      <section class="article-title" >${title}</section>
+      <br/>
+      <hr style=" width:70%; margin:auto; border:1px solid #222;"/>
+      <br/>
+      <section class="article-body">
+      ${body}
+      </section>
+      `
+  this.shadowRoot.appendChild(x)
   }
 }
 
@@ -50,7 +37,7 @@ function load() {
   navbar()
   template.innerHTML = `
         ${css()}
-        <h3> ...loading </h3>
+        ${loading()}
   `
 
   const customElement = window.customElements.get('full-article'),
@@ -65,8 +52,8 @@ function load() {
   try {
     if (params.has('a')) {
       let x = document.querySelector('full-article')
-      getArticle(params.get('a'), (x_res) => {
-        x.display(x_res)
+      searchForArticleX(params.get('a')).then((data) => {
+        x.display(data)
       })
     }
   } catch (err) {

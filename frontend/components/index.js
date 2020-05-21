@@ -1,16 +1,15 @@
+import loading from './utils/Loading.js'
 import navbar from './utils/Navbar.js'
 import mode from './utils/Darkmode.js'
 import searchbar from './utils/Search.js'
-import { getArticles } from './utils/Fetch.js'
-import { wipe } from './utils/IndexedDB.js'
+import { articles } from './utils/Fetch.js'
 
-// mount components
 navbar()
-// dark mode toggle (a nice to have)
 mode()
-// search bar (a nice to have)
 searchbar()
-// fetch articles thumbnails & relevent articles
-getArticles()
-// refrash articles objectStore
-window.onclose = wipe
+const headlines = document.createElement('section')
+headlines.setAttribute('id', 'headlines')
+headlines.innerHTML = loading()
+document.body.appendChild(headlines)
+articles()
+

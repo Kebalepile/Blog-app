@@ -1,14 +1,13 @@
 import css from './Css.js'
 export default function createComponent() {
-  
   try {
     const template = document.createElement('template')
     template.innerHTML = `
-${css()}
-<legend for="mode" id="darkmode">
-    <input type="checkbox" id="mode" />
-       Dark mode
-   </legend>
+      ${css()}
+      <legend for="mode" id="darkmode" title="Dark mode coming soon...">
+          <input type="checkbox" id="mode" />
+            <span>Dark mode</span>
+        </legend>
 `
 
     class Darkmode extends HTMLElement {
@@ -24,7 +23,6 @@ ${css()}
         }
       }
       connectedCallback() {
-        console.log('mothertrucker darkmode in the route')
         this.watch()
       }
     }
@@ -37,4 +35,3 @@ ${css()}
     )
   }
 }
-

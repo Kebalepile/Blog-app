@@ -1,47 +1,69 @@
-import { populateStore, findArticle, allArticles } from './IndexedDB.js'
+
 import headlines from '../article/Headlines.js'
 
-export function getArticles() {
-  const xDatabase = async () => {
+export async function articles() {
+  
     try {
       let res = await fetch('http://127.0.0.1:3001/')
-      console.table(res)
-      if (res.ok && res.status == 200 && res.url === 'http://127.0.0.1:3001/') {
+      if (res.ok && res.status === 200) {
         res = await res.json()
-        populateStore(res)
         headlines(res)
-      } else {
-        res = await res.json()
-        throw `Error ==> ${res.alert}`
-      }
-    } catch (err) {}
-  }
-  allArticles((x_articles) => {
-    switch (x_articles.length) {
-      case 0:
-        xDatabase()
-        break
-      default:
-        headlines(x_articles)
-        break
+      } 
+    } catch (err) {
+      console.error(err)
     }
-  })
 }
 
-export function getArticle(id, x_article) {
+export async function  searchForArticleX(x_id) {
   try {
-    findArticle(id, x_article)
+    let res = await fetch(`http://127.0.0.1:3001/search?a=${x_id}`)
+
+    if (res.ok && res.status === 200) {
+      res = await res.json()
+      return res
+    } else {
+      res = await res.json()
+      throw new Error(`Error ===> ${res.msg}`)
+    }
   } catch (err) {
     console.error(err.message)
   }
 }
 
-export async function searchByX(x_id) {
+export async function sign(pwd) {
+  let opt = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ pwd }),
+  }
+
   try {
-    let articles = await fetch(`http://127.0.0.1:3001/search?a=${x_id}`)
-    articles = await articles.json()
-    return articles
+    let res = await fetch(`http://127.0.0.1:3001/kookiefy`, opt),
+    token = res.headers.get('x-tuuken')
+    res = await res.json()
+    return { access: res.continue, token }
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export async function upload(article, xToken) {
+  let opt = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'xSigned':xToken
+    },
+    body: JSON.stringify(article),
+  }
+  try {
+    let res = await fetch(`http://127.0.0.1:3001/upload`, opt)
+    res = await res.json()
+    return res
   } catch (err) {
     console.error(err.message)
   }
 }
+
