@@ -35,9 +35,9 @@ export default function makeComponent(callBack) {
 
             if (type.includes('password')) {
               let value = sanitizeModule.toText(e.value).data
-              // console.log(value)
+              
               fetchModule.sign(value).then((ok) => {
-                // console.log(ok)
+                
                 x.elements[1].disabled = false
                 if (ok) {
                   e.value = ''

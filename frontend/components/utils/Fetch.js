@@ -1,6 +1,6 @@
 
 import headlines from '../article/Headlines.js'
-
+  // change localhost domain to real domain
 export async function articles() {
   
     try {

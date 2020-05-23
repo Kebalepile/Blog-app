@@ -7,7 +7,7 @@
  
 }
 body{
-  font-family: sans-serif,Arial, Helvetica;
+  font-family: Arial, Helvetica, sans-serif;
 }
 #headlines {
   margin: 150px auto;
@@ -15,7 +15,7 @@ body{
 }
 
 .no-articles {
-  margin:50%  auto;
+  margin:50vh auto;
   text-align:center;
   width:100%;
  font-size: medium;
@@ -23,6 +23,6 @@ body{
 
 .loading{
   width:30vh;
-  margin:40% auto;
+  margin:50vh auto;
   
 }

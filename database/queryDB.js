@@ -35,7 +35,7 @@ async function article(id) {
       db = client.db('keba_blog'),
       collection = db.collection('articles'),
       article = await collection.findOne({ id }, { projection: { _id: 0 } })
-       
+
     client.close()
     return article
   } catch (err) {
@@ -48,7 +48,7 @@ async function upload(article) {
       db = client.db('keba_blog'),
       collection = db.collection('articles'),
       res = await collection.insertOne(article)
-   
+
     client.close()
     return res.result.ok === 1 ? true : false
   } catch (err) {
@@ -62,7 +62,7 @@ async function deleteAll(name) {
       db = client.db('keba_blog'),
       collection = db.collection(name),
       res = await collection.deleteMany()
-console.log(res)
+    console.log(res)
     client.close()
   } catch (err) {
     console.error(err)
@@ -74,10 +74,9 @@ async function credentials() {
     let client = await connect(),
       db = client.db('keba_blog'),
       collection = db.collection('credentials'),
-      user = await collection.find({},{projection: {_id:0}}).toArray()
-      // console.log(user)
-      client.close()
-      return user[0].pwd
+      user = await collection.find({}, { projection: { _id: 0 } }).toArray()
+    client.close()
+    return user[0].pwd
   } catch (err) {
     console.error(err)
   }
@@ -85,10 +84,11 @@ async function credentials() {
 async function getCollections() {
   try {
     let client = await connect(),
-      db =  client.db('keba_blog'),
-      list =  await db.listCollections().toArray()
-    // console.log(list)
+      db = client.db('keba_blog'),
+      list = await db.listCollections().toArray()
+
     client.close()
+    return list
   } catch (error) {
     console.error(error)
   }
@@ -97,9 +97,9 @@ async function getCollections() {
 async function createCollection(name) {
   try {
     let client = await connect(),
-      db = client.db('keba_blog'),
-      res = await db.createCollection(name)
-    console.log(res)
+      db = client.db('keba_blog')
+
+    await db.createCollection(name)
     client.close()
   } catch (error) {
     console.error(error)

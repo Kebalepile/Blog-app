@@ -1,7 +1,6 @@
 import navbar from '../utils/Navbar.js'
 import css from '../utils/Css.js'
 
-// add real content and image url
 navbar()
 const template = document.createElement('template')
 template.innerHTML = `
@@ -9,20 +8,21 @@ ${css()}
   <div class="about">
     <section style="margin:auto; justify-content:center;">
       <div id="pp">
-        <img src="#" loading="lazy" atl="keba's profile pic" width="100%" height="100%"/>
+        <img src="https://images.unsplash.com/photo-1565441966206-6fcfda1c29dc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60" loading="lazy" atl="keba's profile pic" width="100%" height="100%"/>
       </div>
     </section>
     <br/>
     <hr style="background:black; border:none; height:1px;  margin:auto;"/>
     <br/>
-    <p style="margin:auto; text-align:left; background-color:#0222; padding:5px;">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
+    <p style="margin:auto; text-align:left; background-color: #fcfcfc; padding:5px;">
+    &#9995;&#127997; Hi there <br/><br/>
+     my name is <strong>Keba</strong>, I live in South Africa, North West.
+      <br/><br/>
+       I am a developer, i specialize in 
+     <strong> Web development </strong> and <strong>Blockchain development</strong>,
+      <strong>full-stack certified </strong> &#128293; in both fields, if you want to know more about me feel free to <a href="/contact.html">contact</a> me.
+     <br/>
+    ...ooh I also write <a href="/">articles </a> on various topics  &#9996;&#127997;
     </p>
   </div>`
 

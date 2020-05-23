@@ -3,19 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>home</title>
+    <meta name="meta-category" content="Digitalguide" />
+    <meta name="robots" content="index,follow" />
+    <meta
+      name="keywords"
+      content="kebalepile.github.io, fullstack blockchain developer,  fullstack web development"
+    />
+    <meta
+      name="description"
+      content=" a technology, finance blog filled with content usable by blockchain developers and web engineers"
+    />
+    <meta name="author" content="K.T Motshoana" />
+    <meta name="copyright" content="K.T Motshoana" />
+    <title>keba's blog</title>
     <link rel="stylesheet" type="text/css" href="./css/index.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="https://images.unsplash.com/photo-1565441966206-6fcfda1c29dc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60"
+    />
     <script defer>
-    
-      // Check that service workers are supported
       if ('serviceWorker' in navigator) {
-          // Use the window load event to keep the page load performant
-          window.addEventListener('load', () => {
-            navigator.serviceWorker.register("/components/sw.js");
-          });
-        }
-        </script>
-        <script type="module" src="./components/index.js"></script>
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/components/sw.js')
+        })
+      }
+    </script>
+    <script type="module" src="./components/index.js"></script>
   </head>
-  <body> </body>
+  <body></body>
 </html>

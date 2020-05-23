@@ -15,7 +15,7 @@ const urlParser = require('url').parse,
 module.exports = async (req, res) => {
   const pathname = urlParser(req.url, true).pathname
   res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5500')
-  console.log(pathname)
+  
   try {
     switch (pathname) {
       case '/':
@@ -115,15 +115,15 @@ module.exports = async (req, res) => {
                   res.setHeader('Access-Control-Expose-Headers', 'x-tuuken')
                   res.setHeader('x-tuuken', token)
 
-                  ok(res, { msg: 'tuuken set...', continue: true })
+                  ok(res, {  continue: true })
                 } else {
-                  unauthorized(res, { msg: 'Voetsek !!!' })
+                  unauthorized(res, { msg: 'unauthorized demand' })
                 }
               } else {
                 throw 'internal server error'
               }
             } catch (err) {
-              console.error(err)
+              // console.error(err)
             }
           })
         }

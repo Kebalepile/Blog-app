@@ -1,7 +1,7 @@
 import css from '../utils/Css.js'
 import navbar from '../utils/Navbar.js'
-import loading from "../utils/Loading.js"
-import {  searchForArticleX } from '../utils/Fetch.js'
+import loading from '../utils/Loading.js'
+import { searchForArticleX } from '../utils/Fetch.js'
 
 const template = document.createElement('template'),
   url = new URL(location.href),
@@ -12,24 +12,31 @@ class Article extends HTMLElement {
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(template.content.cloneNode(true))
   }
- 
+  tags({ title, keywords, description }) {
+    document.head.querySelector('title').textContent = title
+    document.head.querySelector('meta[name="keywords"]').content = keywords
+    document.head.querySelector(
+      'meta[name="description"]',
+    ).content = description
+  }
   display(data) {
+    this.tags(data)
     let { title, body } = data,
-    x = this.shadowRoot.querySelector('.loading')
+      x = this.shadowRoot.querySelector('.loading')
 
-  this.shadowRoot.removeChild(x)
-  x = document.createElement('div')
-  x.className = 'full-article'
-  x.innerHTML = `
-      <section class="article-title" >${title}</section>
+    this.shadowRoot.removeChild(x)
+    x = document.createElement('div')
+    x.className = 'full-article'
+    x.innerHTML = `
+      <h1 class="article-title" >${title}</h1>
       <br/>
       <hr style=" width:70%; margin:auto; border:1px solid #222;"/>
       <br/>
       <section class="article-body">
       ${body}
       </section>
-      `
-  this.shadowRoot.appendChild(x)
+    `
+    this.shadowRoot.appendChild(x)
   }
 }
 

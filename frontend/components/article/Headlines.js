@@ -5,9 +5,17 @@ export default (res) => {
   headlines.removeChild(headlines.querySelector('.loading'))
 
   if (Array.isArray(res) && res.length > 0) {
-    res.forEach((article) => {
-      publish(article)
-    })
+    res
+      .sort((a, b) => {
+        if (a.date < b.date) {
+          return -1
+        }
+        if (a.date > b.date) {
+          return 1
+        }
+        return 0
+      })
+      .forEach((article) => publish(article))
   } else {
     let msg = document.createElement('div')
     msg.className = 'no-articles'
