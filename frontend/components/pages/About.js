@@ -18,7 +18,7 @@ ${css()}
     &#9995;&#127997; Hi there <br/><br/>
      my name is <strong>Keba</strong>, I live in South Africa, North West.
       <br/><br/>
-       I am a developer, i specialize in 
+       I'm a application programmer, I write software that lets users interact the computer, I specialize in 
      <strong> Web development </strong> and <strong>Blockchain development</strong>,
       <strong>full-stack certified </strong> &#128293; in both fields, if you want to know more about me feel free to <a href="/contact.html">contact</a> me.
      <br/>

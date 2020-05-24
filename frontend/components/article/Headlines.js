@@ -8,12 +8,11 @@ export default (res) => {
     res
       .sort((a, b) => {
         if (a.date < b.date) {
-          return -1
-        }
-        if (a.date > b.date) {
+          console.log(a.date)
+          console.log(b.date)
           return 1
         }
-        return 0
+       
       })
       .forEach((article) => publish(article))
   } else {

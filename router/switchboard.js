@@ -15,7 +15,7 @@ const urlParser = require('url').parse,
 module.exports = async (req, res) => {
   const pathname = urlParser(req.url, true).pathname
   res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5500')
-  
+
   try {
     switch (pathname) {
       case '/':
@@ -62,23 +62,18 @@ module.exports = async (req, res) => {
               if (req.complete) {
                 let token = req.headers['xsigned'],
                   authorized = await verify(token)
-                  
+
                 if (authorized) {
                   new_article = await parse(new_article)
                   new_article.id = nanoid()
-                  upload(new_article)
-                    .then((saved) => {
-                      if (saved) {
-                        created(res)
-                      } else {
-                        throw 'internal server error'
-                      }
-                    })
-                    .catch((err) => {
-                      internalServerError(res, err.message)
-                    })
+                  let saved = await upload(new_article)
+                  if (saved) {
+                    created(res)
+                  } else {
+                    throw 'internal server error'
+                  }
                 } else {
-                  throw 'Unable to upload currently'
+                  throw 'internal server error'
                 }
               } else {
                 throw 'internal server error'
@@ -115,7 +110,7 @@ module.exports = async (req, res) => {
                   res.setHeader('Access-Control-Expose-Headers', 'x-tuuken')
                   res.setHeader('x-tuuken', token)
 
-                  ok(res, {  continue: true })
+                  ok(res, { continue: true })
                 } else {
                   unauthorized(res, { msg: 'unauthorized demand' })
                 }
@@ -123,7 +118,7 @@ module.exports = async (req, res) => {
                 throw 'internal server error'
               }
             } catch (err) {
-              // console.error(err)
+              
             }
           })
         }

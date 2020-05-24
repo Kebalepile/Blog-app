@@ -105,6 +105,7 @@ legend  {
   grid-area: i;
   width: 150px;
   height: 150px;
+  border-radius:2px;
 }
 
 .headline :nth-child(2) {
