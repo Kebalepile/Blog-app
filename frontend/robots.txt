@@ -1,2 +1,2 @@
 User-agent: *
-Disallow: upload.html
+Disallow: /kwala.html

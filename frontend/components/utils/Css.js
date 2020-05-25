@@ -149,7 +149,9 @@ legend  {
   padding:5px;
   margin-right:5px;
 }
-
+#pp > img {
+  border-radius:2px;
+}
 
 .alert{
   position:fixed;
@@ -212,8 +214,9 @@ legend  {
   border-radius:2px;
 }
 .loading{
-  width:50vh;
+  width:200px;
   margin:30vh auto;
+  text-align:center;
 }
 @media screen and (max-width: 720px) {
   #headline-body {

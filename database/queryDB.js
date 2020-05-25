@@ -3,6 +3,7 @@ const { MongoClient } = require('mongodb'),
   uri = `mongodb+srv://kebalepile:${process.env.PWD}@cluster0-l3y3d.mongodb.net/test?retryWrites=true&w=majority`
 
 async function connect() {
+  
   try {
     let client = new MongoClient(uri, {
       useNewUrlParser: true,
@@ -20,24 +21,25 @@ async function articles() {
     let client = await connect(),
       db = client.db('keba_blog'),
       collection = db.collection('articles'),
-      articles = await collection.find({}, { projection: { _id: 0 } }).toArray()
-
+      res = await collection.find({}, { projection: { _id: 0 } }).toArray()
+      
     client.close()
-    return articles
+    return res
   } catch (err) {
     console.error(err)
   }
 }
+
 
 async function article(id) {
   try {
     let client = await connect(),
       db = client.db('keba_blog'),
       collection = db.collection('articles'),
-      article = await collection.findOne({ id }, { projection: { _id: 0 } })
+      res = await collection.findOne({ id }, { projection: { _id: 0 } })
 
     client.close()
-    return article
+    return res
   } catch (err) {
     console.error(err)
   }
@@ -74,9 +76,10 @@ async function credentials() {
     let client = await connect(),
       db = client.db('keba_blog'),
       collection = db.collection('credentials'),
-      user = await collection.find({}, { projection: { _id: 0 } }).toArray()
+      res = await collection.find({}, { projection: { _id: 0 } }).toArray()
     client.close()
-    return user[0].pwd
+   
+    return res[0].pwd
   } catch (err) {
     console.error(err)
   }
@@ -86,7 +89,7 @@ async function getCollections() {
     let client = await connect(),
       db = client.db('keba_blog'),
       list = await db.listCollections().toArray()
-
+     console.log(list)
     client.close()
     return list
   } catch (error) {
@@ -105,6 +108,17 @@ async function createCollection(name) {
     console.error(error)
   }
 }
+async function dropCollection(name) {
+  try {
+    let client = await connect(),
+      db = client.db('keba_blog'),
+      res =  await db.dropCollection(name)
+    console.log(res)
+    client.close()
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 module.exports = {
   articles,
@@ -114,4 +128,5 @@ module.exports = {
   credentials,
   getCollections,
   createCollection,
+  dropCollection
 }

@@ -20,14 +20,17 @@ class Article extends HTMLElement {
     ).content = description
   }
   display(data) {
-    this.tags(data)
-    let { title, body } = data,
-      x = this.shadowRoot.querySelector('.loading')
+    let x = this.shadowRoot.querySelector('.loading')
 
-    this.shadowRoot.removeChild(x)
-    x = document.createElement('div')
-    x.className = 'full-article'
-    x.innerHTML = `
+    if (data.hasOwnProperty('msg')) {
+      x.innerHTML = `<h3> &#128514; ${data.msg} </h3>`
+    } else {
+      this.tags(data)
+      let { title, body } = data
+      this.shadowRoot.removeChild(x)
+      x = document.createElement('div')
+      x.className = 'full-article'
+      x.innerHTML = `
       <h1 class="article-title" >${title}</h1>
       <br/>
       <hr style=" width:70%; margin:auto; border:1px solid #222;"/>
@@ -36,6 +39,8 @@ class Article extends HTMLElement {
       ${body}
       </section>
     `
+    }
+
     this.shadowRoot.appendChild(x)
   }
 }

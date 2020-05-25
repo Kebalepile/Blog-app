@@ -21,9 +21,10 @@ export async function  searchForArticleX(x_id) {
     if (res.ok && res.status === 200) {
       res = await res.json()
       return res
-    } else {
+    } else if(res.status === 404) {
       res = await res.json()
-      throw new Error(`Error ===> ${res.msg}`)
+  
+      return res
     }
   } catch (err) {
     console.error(err.message)

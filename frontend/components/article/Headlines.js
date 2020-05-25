@@ -8,17 +8,19 @@ export default (res) => {
     res
       .sort((a, b) => {
         if (a.date < b.date) {
-          console.log(a.date)
-          console.log(b.date)
           return 1
         }
-       
+        if (a.date > b.date) {
+          return -1
+        }
+        return 0
       })
       .forEach((article) => publish(article))
   } else {
+    
     let msg = document.createElement('div')
     msg.className = 'no-articles'
-    msg.innerHTML = '<em>No articles to display</em>'
+    msg.innerHTML = `<h3> &#128532; ${res.msg}</h3>`
 
     headlines.appendChild(msg)
   }

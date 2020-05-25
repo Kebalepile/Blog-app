@@ -6,7 +6,7 @@ module.exports.kontinue = (res, msg) => {
   res.end(stringify(msg))
 }
 
-module.exports.ok = (res, posts) => {
+module.exports.ok = (res, posts = undefined) => {
   res.setHeader('Content-Type', 'application/json')
   res.statusCode = 200
   res.end(
@@ -52,11 +52,11 @@ module.exports.notModified = (res) => {
 module.exports.notFound = (res) => {
   res.setHeader('Content-Type', 'application/json')
   res.statusCode = 404
-  res.end(stringify({ msg: 'whatever your looking for its not here...' }))
+  res.end(stringify({ msg: '404 not found ' }))
 }
 
-module.exports.internalServerError = (res, error) => {
+module.exports.internalServerError = (res) => {
   res.setHeader('Content-Type', 'application/json')
   res.statusCode = 500
-  res.end(stringify({ error, msg: "I'm hungry, let me hold a dollar" }))
+  res.end()
 }

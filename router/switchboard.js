@@ -20,13 +20,14 @@ module.exports = async (req, res) => {
     switch (pathname) {
       case '/':
         if (pass({ req, method: 'get' })) {
-          articles()
-            .then((data) => {
-              ok(res, data)
-            })
-            .catch((err) => {
-              internalServerError(res, err.message)
-            })
+          let data = await articles()
+
+          if (data.length <= 0) {
+            ok(res)
+          } else {
+            ok(res, data)
+          }
+
           break
         }
         notFound(res)
@@ -37,14 +38,14 @@ module.exports = async (req, res) => {
           article(queryObject.a)
             .then((data) => {
               if (data.id === queryObject.a) {
-                ok(res, data)
-              } else {
-                notFound(res)
+                if (data.length <= 0) {
+                  ok(res)
+                } else {
+                  ok(res, data)
+                }
               }
             })
-            .catch((err) => {
-              internalServerError(res, err.message)
-            })
+            .catch((err) => notFound(res))
         }
         break
       case '/upload':
@@ -79,7 +80,7 @@ module.exports = async (req, res) => {
                 throw 'internal server error'
               }
             } catch (err) {
-              internalServerError(res, err)
+              internalServerError(res)
             }
           })
           break
@@ -112,13 +113,18 @@ module.exports = async (req, res) => {
 
                   ok(res, { continue: true })
                 } else {
-                  unauthorized(res, { msg: 'unauthorized demand' })
+                  res.setHeader('Access-Control-Expose-Headers', 'x-tuuken')
+                  res.setHeader('x-tuuken', 'unauthorized demand')
+                  unauthorized(res, {
+                    msg: 'unauthorized demand',
+                    continue: false,
+                  })
                 }
               } else {
                 throw 'internal server error'
               }
             } catch (err) {
-              
+              internalServerError(res)
             }
           })
         }
@@ -128,6 +134,6 @@ module.exports = async (req, res) => {
         break
     }
   } catch (err) {
-    internalServerError(res, err.message)
+    internalServerError(res)
   }
 }

@@ -6,7 +6,7 @@ async function verify(token) {
     const ok = await jwt.verify(token, process.env.SK).ok
     return ok
   } catch (err) {
-    console.error(err)
+    // console.error(err)
   }
 }
 
@@ -22,7 +22,7 @@ async function sign() {
     return token
     
   } catch (err) {
-    console.error(err)
+    // console.error(err)
   }
 }
 

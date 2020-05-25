@@ -8,7 +8,9 @@ ${css()}
   <div class="about">
     <section style="margin:auto; justify-content:center;">
       <div id="pp">
-        <img src="https://images.unsplash.com/photo-1565441966206-6fcfda1c29dc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60" loading="lazy" atl="keba's profile pic" width="100%" height="100%"/>
+        <img src="../../images/sunset.jpg" 
+        loading="lazy" atl="image by johannes plenio on unsplash.com"
+        title="Image by johannes plenio on unsplash.com" width="100%" height="100%"/>
       </div>
     </section>
     <br/>
@@ -16,7 +18,7 @@ ${css()}
     <br/>
     <p style="margin:auto; text-align:left; background-color: #fcfcfc; padding:5px;">
     &#9995;&#127997; Hi there <br/><br/>
-     my name is <strong>Keba</strong>, I live in South Africa, North West.
+     My Name is <strong>Keba</strong>, I live in South Africa, North West.
       <br/><br/>
        I'm a application programmer, I write software that lets users interact the computer, I specialize in 
      <strong> Web development </strong> and <strong>Blockchain development</strong>,
