@@ -7,7 +7,7 @@
     "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.5.7",
-    "nanoid": "^3.1.7",
+    "nanoid": "^3.1.31",
     "nodemon": "^2.0.4"
   },
   "devDependencies": {},
